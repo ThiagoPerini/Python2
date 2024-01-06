@@ -8,13 +8,12 @@ def fabrica_de_operacoes(tipo):
     elif tipo == 'subtrair':
         def subtrair(*args):
             valor = 0
-            valor2 = 0
             for item in args:
-               if item > valor:
-                   valor = item
-               else:
-                   valor2 = item
-            return valor - valor2
+              if valor == 0 and item >= 1:
+                  valor = item - valor  # 5
+              else:
+                  valor = valor - item
+            return valor
         return subtrair
 
     elif tipo == 'multiplicar':
@@ -45,7 +44,8 @@ valor2 = int(input('Informe o segundo valor: '))
 
 if tipo_operacao == 'adicionar':
     operacao = fabrica_de_operacoes('soma')
-    print(operacao(valor1, valor2))
+    print('\nVocê escolheu adição')
+    print(f'O resultado da adição de {valor1} + {valor2} = ', operacao(valor1, valor2))
 
 elif tipo_operacao == 'subtrair':
     subtrair = fabrica_de_operacoes('subtrair')
@@ -58,6 +58,10 @@ elif tipo_operacao == 'multiplicar':
     print(f'O resultado da multiplicação de {valor1} * {valor2} = ', multiplicar(valor1, valor2))
 
 elif tipo_operacao == 'dividir':
-    dividir = fabrica_de_operacoes('dividir')
-    print('\nVocê escolheu dividir')
-    print(f'O resultado da divisão de {valor1} / {valor2} = ', dividir(valor1, valor2))
+    try:
+        dividir = fabrica_de_operacoes('dividir')
+        dividir(valor1, valor2)
+        print('\nVocê escolheu dividir')
+        print(f'O resultado da divisão de {valor1} / {valor2} =', dividir(valor1, valor2))
+    except ZeroDivisionError:
+        print('\nErro Divisão por zero')
