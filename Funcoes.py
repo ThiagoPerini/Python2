@@ -1,5 +1,5 @@
 
-def fabrica_de_operacoes(tipo):
+def calculadora(tipo):
     if tipo == 'soma':
         def soma(*args):
             return sum(args)
@@ -10,7 +10,7 @@ def fabrica_de_operacoes(tipo):
             valor = 0
             for item in args:
               if valor == 0 and item >= 1:
-                  valor = item - valor  # 5
+                  valor = item - valor
               else:
                   valor = valor - item
             return valor
@@ -26,9 +26,10 @@ def fabrica_de_operacoes(tipo):
 
     elif tipo == 'dividir':
         def dividir(*args):
-            valor = 1
+            valor = 0
             for item in args:
-                if valor == 1 and item > valor:
+                if valor == 0 and item > valor:
+                    valor = 1
                     valor = item / valor
                 else:
                     valor = valor / item
@@ -43,23 +44,23 @@ valor2 = int(input('Informe o segundo valor: '))
 
 
 if tipo_operacao == 'adicionar':
-    operacao = fabrica_de_operacoes('soma')
+    operacao = calculadora('soma')
     print('\nVocê escolheu adição')
     print(f'O resultado da adição de {valor1} + {valor2} = ', operacao(valor1, valor2))
 
 elif tipo_operacao == 'subtrair':
-    subtrair = fabrica_de_operacoes('subtrair')
+    subtrair = calculadora('subtrair')
     print('\nVocê escolheu subtração')
     print(f'O resultado da subtração de {valor1} - {valor2} =  ', subtrair(valor1, valor2))
 
 elif tipo_operacao == 'multiplicar':
-    multiplicar = fabrica_de_operacoes('multiplicar')
+    multiplicar = calculadora('multiplicar')
     print('\nVocê escolheu multiplicar')
     print(f'O resultado da multiplicação de {valor1} * {valor2} = ', multiplicar(valor1, valor2))
 
 elif tipo_operacao == 'dividir':
     try:
-        dividir = fabrica_de_operacoes('dividir')
+        dividir = calculadora('dividir')
         dividir(valor1, valor2)
         print('\nVocê escolheu dividir')
         print(f'O resultado da divisão de {valor1} / {valor2} =', dividir(valor1, valor2))
